@@ -15,7 +15,17 @@
 
 .left {
   flex: 1;
+  display: flex;
+  max-width: 200px;
 }
+
+.left img {
+  width: 300%;
+  height: 240px;
+  margin-top: 45px;
+  margin-left: -150px;
+}
+
 
 .middle {
   flex: 2;
@@ -23,17 +33,7 @@
   font-size: 40px;
   font-weight: bold;
 }
-  
-  .left {
-    flex: 1;
-  }
-  
-  .middle {
-    flex: 2;
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-  }
+
 
 .right {
   flex: 1;
@@ -51,11 +51,13 @@
   font-size: 40px;
 }
 
-.logo {
-  width: 20px;
-  height: 20px;
+/* .logo {
+  width: 300px;
+  height: 300px;
   margin-right: 10px;
-}
+} */
+
+
 
 .title {
   margin: 0;

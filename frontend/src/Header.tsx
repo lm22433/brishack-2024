@@ -1,12 +1,12 @@
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import "./Header.css";
-import Logo from "./assets/Logo-removebg-preview.png";
+import Logo from "./assets/Logo.png";
 
 const Header = () => {
   return (
     <header className="header">
       <div className="left">
-        <img style={{ width: 100, height: 80 }} src={Logo} alt="Logo" />
+        <img className='Logoz' src={Logo} alt="Logo" />
       </div>
       <div className="middle">Qwit</div>
       <div className="right">
