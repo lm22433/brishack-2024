@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import "./App.css";
 import Header from "./Header";
+import "./Login.css";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -38,48 +38,45 @@ function Login() {
 
   return (
     <>
-      <header>
-        <Header />
-      </header>
+      <Header />
       <body>
-        <h1>Login</h1>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <div style={{ width: 500, textAlign: "right" }}>
-              <label>
-                Username:
+        <div className="loginContainer">
+          <h1>Login</h1>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <div style={{ width: 500, textAlign: "right" }}>
                 <input
                   type="text"
                   name="username"
+                  placeholder="Username"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                 />
-              </label>
-            </div>
-            <div style={{ width: 500, textAlign: "right" }}>
-              <label>
-                Password:
+              </div>
+              <div style={{ width: 500, textAlign: "right" }}>
                 <input
                   type="password"
                   name="password"
+                  placeholder="Password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
-              </label>
-            </div>
-            <div style={{ width: 500, textAlign: "center" }}>
-              <input type="submit" value="Submit" />
-            </div>
-          </form>
-        </div>
-        {showError && (
-          <div className="error-popup">
-            <p>{errorMessage}</p>
-            <button onClick={() => setShowError(false)}>Close</button>
+              </div>
+              <div style={{ width: 500, textAlign: "center" }}>
+                <input type="submit" value="Submit" />
+              </div>
+            </form>
           </div>
-        )}
+          {showError && (
+            <div className="error-popup">
+              <p>{errorMessage}</p>
+              <button onClick={() => setShowError(false)}>Close</button>
+            </div>
+          )}
+        </div>
       </body>
     </>
+
   );
 }
 

@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+header {
+    text-align: center;
+  }
+  
+.login-container {
+    /* Your existing styles */
+    margin: 0 auto; /* Centering the login container */
+    text-align: center; /* Aligning the content inside the login container */
+}
+
+input {
+    display: block;
+    margin: 0 auto; /* Centering the input */
+    text-align: center; /* Aligning the text inside the input */
+    width: 100%; /* Making the input full width */
+    padding: 10px; /* Adding some padding */
+    margin-bottom: 15px; /* Adding some margin at the bottom */
+    border: 1px solid #ccc; /* Adding a border */
+    border-radius: 5px; /* Adding a border radius */
+    box-sizing: border-box; /* Making sure the padding and border are included in the width */
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.error-popup {
+    background-color: #ffcccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.error-popup p {
+    margin: 0;
+    color: #cc0000;
+}
+
+.error-popup button {
+    background-color: #990000;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 5px;
+}
