@@ -105,8 +105,8 @@ const ChartComponent = () => {
       {
         label: "Nicotine Intake (mg)",
         data: [5, 0, 1, 2, 8, 7, 3],
-        backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-        borderColor: ["rgba(255, 99, 132, 1)"],
+        backgroundColor: ["rgba(213,87,247,0.2)"],
+        borderColor: ["rgba(213,87,247,1)"],
         borderWidth: 1,
       },
     ],
