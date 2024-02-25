@@ -41,6 +41,32 @@ const ChartComponent = () => {
 
     ],
   };
+  const chartOptions = {
+    layout: {
+        padding: {
+          top: 25, // Adjust the top padding as needed
+        },
+      },
+    scales: {
+      x: {
+        ticks: {
+          color: 'white', // Font color for x-axis labels
+        },
+      },
+      y: {
+        ticks: {
+          color: 'white', // Font color for y-axis labels
+        },
+      },
+    },
+    plugins: {
+        legend: {
+          labels: {
+            color: 'white', // Font color for dataset labels
+          },
+        },
+      },
+  };
 
   return (
     <div>
@@ -84,8 +110,8 @@ const ChartComponent = () => {
             
         </main>
         <div className="chart-container">
-            <Bar data={chartData1} />
-            <Bar data={chartData2}/>
+            <Bar data={chartData1} options={chartOptions}/>
+            <Bar data={chartData2} options={chartOptions}/>
         </div>
     </div>
     

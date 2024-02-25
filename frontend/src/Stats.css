@@ -17,13 +17,13 @@ main .analyse > div{
 }
 
  .chart-container {
-    display: flex;
-    justify-content: space-around;
+    display: absolute;
+    justify-content: center;
   }
   
   .chart-container canvas {
-    width: 20%; /* Adjust the width as needed */
-    height: 50px; /* Adjust the height as needed */
+    width: 40%; /* Adjust the width as needed */
+    height: 10px; /* Adjust the height as needed */
     margin: 10px; /* Add some margin between the charts */
   } 
   
