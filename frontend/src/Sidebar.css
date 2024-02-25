@@ -36,3 +36,7 @@
 .sidebar button:hover {
   text-decoration: none;
 }
+
+.logout{
+  margin-top: 300px;
+}
