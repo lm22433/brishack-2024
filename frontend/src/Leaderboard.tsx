@@ -1,10 +1,26 @@
 import { useState } from "react"
 import { TestData1, TestData2 } from "./TestData"
-import { Line } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { CategoryScale, Chart as ChartJS} from "chart.js/auto";
-import { Chart } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale)
+
+function GetStreak(indata: any[]) {
+    let nums = indata.map((data: { novapes: any; }) => data.novapes)
+    let currentStreak = 1;
+    let maxStreak = 1;
+
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] === nums[i-1]) {
+            currentStreak++;
+            maxStreak = Math.max(maxStreak, currentStreak);
+        } else {
+            currentStreak = 1;
+        }
+    }
+
+    return maxStreak;
+}
 
 function Leaderboard() {
     const [testData, setTestData] = useState({
@@ -30,6 +46,29 @@ function Leaderboard() {
             },
         ],
     });
+
+    const [testStreaks, setTestStreaks] = useState([0,0])
+    const [dataSets, setDataSets] = useState([TestData1, TestData2])
+
+    for (let i = 0; i < testStreaks.length; i++) {
+        testStreaks[i] = GetStreak(dataSets[i])
+    }
+
+    const [streakData, setStreakData] = useState({
+        labels: ["Person 1", "Person 2"],
+        datasets: [
+            {
+                label: "Best Streaks",
+                data: testStreaks,
+                backgroundColor: [
+                    "rgba(75,192,192,1)",
+                    "rgba(123,160,18,1)",
+                ],
+                borderColor: "black",
+                borderWidth: 2,
+            },
+        ],
+    });
   
     return (
       <>
@@ -37,6 +76,9 @@ function Leaderboard() {
             <h1>LeaderBoard</h1>
             <div style={{ width: 700}}>
                 <Line data={testData} />
+            </div>
+            <div style={{ width: 700}}>
+                <Bar data={streakData} />
             </div>
         </div>
       </>
