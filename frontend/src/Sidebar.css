@@ -19,7 +19,12 @@
   font-size: 16px;
 }
 
-.nhs-link:hover {
+.NHS-link {
+  color: inherit; /* Use the default color */
+  text-decoration: none; /* Remove underline */
+}
+
+.NHS-link:hover {
   color: inherit; /* Use the default color on hover */
 }
 
