@@ -9,10 +9,11 @@ function getRandomInt(min: number, max: number): number {
 }
 
 function Dashboard() {
-  const [streak, setStreak] = useState(5);
-  const [turkey, setTurkey] = useState(2);
-  let index = getRandomInt(0, 8);
-  const [msg, setMsg] = useState(Messages[index]);
+    const [streak, setStreak] = useState(5)
+    const [turkey, setTurkey] = useState(2)
+    let index = getRandomInt(0,8)
+    const [msg, setMsg] = useState(Messages[index])
+    const time = 60
 
   return (
     <>
@@ -22,7 +23,7 @@ function Dashboard() {
       <h2>Username: {localStorage.getItem("username")}</h2>
       <h2>Name: {localStorage.getItem("name")}</h2>
       <div>
-        <Timer initialTime={60} />
+        <Timer initialTime={time} />
       </div>
       <div>{msg}</div>
       <div>
