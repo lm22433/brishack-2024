@@ -1,21 +1,24 @@
-import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import './Header.css';
-import Logo from './assets/Logo-removebg-preview.png';
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import "./Header.css";
+import Logo from "./assets/Logo-removebg-preview.png";
 
 const Header = () => {
   return (
     <header className="header">
       <div className="left">
-        <img src={Logo} alt="Logo"/>
+        <img style={{ width: 100, height: 80 }} src={Logo} alt="Logo" />
       </div>
-      <div className="middle">
-        Qwit
-      </div>
+      <div className="middle">Qwit</div>
       <div className="right">
-        <a href="https://www.facebook.com"><FaFacebook /></a>
-        <a href="https://www.twitter.com"><FaTwitter /></a>
-        <a href="https://www.instagram.com"><FaInstagram /></a>
+        <a href="https://www.facebook.com">
+          <FaFacebook />
+        </a>
+        <a href="https://www.twitter.com">
+          <FaTwitter />
+        </a>
+        <a href="https://www.instagram.com">
+          <FaInstagram />
+        </a>
       </div>
     </header>
   );
