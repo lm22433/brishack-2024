@@ -4,6 +4,8 @@ import { Bar } from "react-chartjs-2";
 import { CategoryScale, Chart as ChartJS } from "chart.js/auto";
 import "./Stats.css";
 import Header from "./Header";
+import Sidebar from "./Sidebar";
+import SidebarButton from "./SidebarButton";
 ChartJS.register(CategoryScale);
 
 const ChartComponent = () => {
@@ -77,43 +79,36 @@ const ChartComponent = () => {
 
   return (
     <div>
-      <Header />
+      <Header/>
+      <SidebarButton/>
       <main>
         <div className="analyse">
           <div className="longestStreak">
-            <div className="info">
-              <h3>Longest Streak</h3>
-              <h2>4 days</h2>
+            <div className="topRow">
+                <h3>Longest Streak</h3>
+                <h2>4 days</h2>
             </div>
           </div>
           <div className="money">
-            <h3>Money Spent</h3>
-            <h2> £348</h2>
+                <h3>Money Spent</h3>
+                <h2> £348</h2>
           </div>
-          <div>
-            <div className="lastToke">
-              <h3> Time Since Last Toke</h3>
-              <h2>4 Hours 43 Minutes</h2>
-            </div>
+          <div className="lastToke">
+                <h3> Time Since Last Toke</h3>
+                <h2>4 Hours 43 Minutes</h2>
           </div>
-          <div>
-            <div className="currentStreak">
-              <h3>Current Streak</h3>
-              <h2>1 Day</h2>
-            </div>
-          </div>
-          <div>
-            <div className="todayTokes">
-              <h3> Tokes Today</h3>
-              <h2> 5 Tokes</h2>
-            </div>
-          </div>
-          <div>
-            <div className="weekTokes">
-              <h3> Tokes This Week</h3>
-              <h2> 45 Tokes</h2>
-            </div>
-          </div>
+          <div className="currentStreak">
+                <h3>Current Streak</h3>
+                <h2>1 Day</h2>
+           </div>
+           <div className="todayTokes">
+                <h3> Tokes Today</h3>
+                <h2> 5 Tokes</h2>
+           </div>
+           <div className="weekTokes">
+                <h3> Tokes This Week</h3>
+                <h2> 45 Tokes</h2>
+           </div>
         </div>
       </main>
       <div className="chart-container">

@@ -1,4 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { Response } from 'express';
 import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
 
@@ -6,7 +12,7 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
-  async loginUser(username: string, password: string) {
+  async loginUser(username: string, password: string, @Res() res: Response) {
     const user = await this.prismaService.user.findUnique({
       where: {
         username: username,
@@ -14,15 +20,15 @@ export class UsersService {
     });
 
     if (!user) {
-      return { error: 'User not found' };
+      throw new NotFoundException('User not found');
     }
 
     const isPasswordMatching = await bcrypt.compare(password, user.password);
     if (!isPasswordMatching) {
-      return { error: 'Password is incorrect' };
+      throw new UnauthorizedException('Password is incorrect');
     }
 
-    return { message: 'Login successful.', userId: user.id };
+    res.status(200).json({ message: 'Login successful.', userId: user.id });
   }
 
   async registerUser(
