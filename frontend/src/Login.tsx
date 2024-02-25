@@ -1,17 +1,29 @@
-import { useState } from 'react'
 import './App.css'
 
 function Login() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <div></div>
       <h1>Login</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Login count is {count}
-        </button>
+      <div>
+        <form>
+        <div style = {{width: 500, textAlign: 'right'}}>
+                <label>
+                    Username:
+                    <input type="text" name="username" />
+                </label>
+            </div>
+            <div style = {{width: 500, textAlign: 'right'}}>
+                <label>
+                    Password:
+                    <input type="password" name="password" />
+                </label>
+            </div>
+            <div style = {{width: 500, textAlign: 'center'}}>
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
       </div>
     </>
   )
