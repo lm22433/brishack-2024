@@ -1,0 +1,37 @@
+.sidebar {
+  position: fixed;
+  top: 120px;
+  left: 0px;
+  width: 130px;
+  height: 100%;
+  /* background-color: #333; Dark background color */
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff; /* White text color */
+  padding: 20px;
+  z-index: -1;
+}
+
+.sidebar a {
+  /* margin-top: 100px; */
+  display: block;
+  color: #fff; /* White text color */
+  text-decoration: none; /* Remove underline */
+  margin-bottom: 10px; /* Add some space between links */
+  font-size: 16px; /* Font size */
+  /* z-index: 0; */
+}
+
+.top {
+  margin-top: 50px; /* Remove margin from top link */
+  display: block;
+  color: #fff; /* White text color */
+  text-decoration: none; /* Remove underline */
+  margin-bottom: 10px; /* Add some space between links */
+  font-size: 16px; /* Font size */
+  /* z-index: 0; */
+
+}
+
+.sidebar a:hover {
+  text-decoration: none; /* Underline on hover */
+}
