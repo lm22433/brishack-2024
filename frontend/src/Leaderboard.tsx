@@ -74,7 +74,7 @@ function Leaderboard() {
   
     return (
       <>
-        <header>
+        <header style={{marginBottom:20}}>
             <Header />
             <SidebarButton />
         </header>
