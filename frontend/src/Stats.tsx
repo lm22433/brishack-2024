@@ -4,9 +4,72 @@ import { CategoryScale, Chart as ChartJS } from "chart.js/auto";
 import "./Stats.css";
 import Header from "./Header";
 import SidebarButton from "./SidebarButton";
+import { useEffect, useState } from "react";
+import axios from "axios";
 ChartJS.register(CategoryScale);
 
+function secondsToHoursAndMinutesFormatted(seconds: number): string {
+  const hours = Math.floor(seconds / 3600);
+  const remainingSeconds = seconds % 3600;
+  const minutes = Math.floor(remainingSeconds / 60);
+  return `${hours} Hours and ${minutes} Minutes`;
+}
+
 const ChartComponent = () => {
+  const [latestTokeDateTimeSecs, setLatestTokeDateTimeSecs] = useState(0);
+
+  const [numberOfTokesDaily, setNumberOfTokesDaily] = useState(0);
+  const [numberOfTokesWeekly, setNumberOfTokesWeekly] = useState(0);
+  const [numberOfTokesTotal, setNumberOfTokesTotal] = useState(0);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+
+    const fetchLatestTokeDateTime = async () => {
+      await axios
+        .get(`http://localhost:3000/api/vapes/user/${userId}/last`)
+        .then((res: any) => {
+          const currentTime = new Date();
+          const lastTokeTime = new Date(res.data.date);
+
+          const timeDifferenceMs =
+            currentTime.getTime() - lastTokeTime.getTime();
+          const timeDifferenceSeconds = Math.abs(timeDifferenceMs / 1000);
+
+          console.log("Time difference in seconds:", timeDifferenceSeconds);
+          setLatestTokeDateTimeSecs(timeDifferenceSeconds);
+        });
+    };
+
+    const fetchNumberOfTokesDaily = async () => {
+      await axios
+        .get(`http://localhost:3000/api/vapes/user/${userId}/daily`)
+        .then((res: any) => {
+          setNumberOfTokesDaily(res.data.length);
+        });
+    };
+    const fetchNumberOfTokesWeekly = async () => {
+      await axios
+        .get(`http://localhost:3000/api/vapes/user/${userId}/weekly`)
+        .then((res: any) => {
+          setNumberOfTokesWeekly(res.data.length);
+        });
+    };
+    const fetchNumberOfTokesTotal = async () => {
+      await axios
+        .get(`http://localhost:3000/api/vapes/user/${userId}`)
+        .then((res: any) => {
+          setNumberOfTokesTotal(res.data.length);
+        });
+    };
+
+    fetchLatestTokeDateTime();
+
+    fetchNumberOfTokesDaily();
+    fetchNumberOfTokesWeekly();
+    fetchNumberOfTokesTotal();
+  }, []);
+
   const chartData1 = {
     labels: [
       "Monday",
@@ -81,48 +144,38 @@ const ChartComponent = () => {
         <Header />
         <SidebarButton />
       </header>
-      <main style={{ marginTop: '8rem' }}>
-          <div className="analyse">
-            <div className="longestStreak">
-              <div className="info">
-                <h3>Longest Streak</h3>
-                <h2>4 days</h2>
-              </div>
-            </div>
-            <div className="money">
-              <h3>Money Spent</h3>
-              <h2> £348</h2>
-            </div>
-            <div>
-              <div className="lastToke">
-                <h3> Time Since Last Toke</h3>
-                <h2>4 Hours 43 Minutes</h2>
-              </div>
-            </div>
-            <div>
-              <div className="currentStreak">
-                <h3>Current Streak</h3>
-                <h2>1 Day</h2>
-              </div>
-            </div>
-            <div>
-              <div className="todayTokes">
-                <h3> Tokes Today</h3>
-                <h2> 5 Tokes</h2>
-              </div>
-            </div>
-            <div>
-              <div className="weekTokes">
-                <h3> Tokes This Week</h3>
-                <h2> 45 Tokes</h2>
-              </div>
-            </div>
+      <main style={{ marginTop: "8rem" }}>
+        <div className="analyse">
+          <div className="money">
+            <h3>Money Spent</h3>
+            <h2>£{(Math.ceil(0.85 * numberOfTokesTotal) / 100).toFixed(2)}</h2>
           </div>
-        </main>
-        <div className="chart-container">
-          <Bar data={chartData1} options={chartOptions} />
-          <Bar data={chartData2} options={chartOptions} />
+          <div className="lastToke">
+            <h3>Time Since Last Toke</h3>
+            <h2>{secondsToHoursAndMinutesFormatted(latestTokeDateTimeSecs)}</h2>
+          </div>
+          <div className="longestStreak">
+            <h3>Longest Streak</h3>
+            <h2>4 days</h2>
+          </div>
+          <div className="todayTokes">
+            <h3>Tokes Today</h3>
+            <h2>{numberOfTokesDaily}</h2>
+          </div>
+          <div className="weekTokes">
+            <h3>Tokes This Week</h3>
+            <h2>{numberOfTokesWeekly}</h2>
+          </div>
+          <div className="totalTokes">
+            <h3>Total Tokes</h3>
+            <h2>{numberOfTokesTotal}</h2>
+          </div>
         </div>
+      </main>
+      <div className="chart-container">
+        <Bar data={chartData1} options={chartOptions} />
+        <Bar data={chartData2} options={chartOptions} />
+      </div>
     </>
   );
 };

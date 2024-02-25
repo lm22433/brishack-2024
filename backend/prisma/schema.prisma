@@ -15,6 +15,7 @@ model User {
   name String
   signUpDate DateTime @default(now())
   vapes Vape[]
+  lastChallengeDate DateTime @default(now())
 }
 
 model Vape {
