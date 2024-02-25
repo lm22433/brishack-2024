@@ -15,19 +15,24 @@ function Dashboard() {
     const [msg, setMsg] = useState(Messages[index])
     const time = 60
 
-    return (
-        <>
-            <Header />
-            <SidebarButton />
-            <h1>Dashboard</h1>
-            <h2>Profile Username Here</h2>
-            <Timer initialTime={time} />
-            <div>{msg}</div>
-            <div>
-                <a style={{textAlign: "center", margin: 50}}>Streak: {streak}</a>
-                <a style={{textAlign: "center", margin: 50}}>Largest Turkey: {turkey}</a>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <Header />
+      <SidebarButton />
+      <h1>Dashboard</h1>
+      <h2>Username: {localStorage.getItem("username")}</h2>
+      <h2>Name: {localStorage.getItem("name")}</h2>
+      <div>
+        <Timer initialTime={time} />
+      </div>
+      <div>{msg}</div>
+      <div>
+        <a style={{ textAlign: "center", margin: 50 }}>Streak: {streak}</a>
+        <a style={{ textAlign: "center", margin: 50 }}>
+          Largest Turkey: {turkey}
+        </a>
+      </div>
+    </>
+  );
 }
-export default Dashboard
+export default Dashboard;

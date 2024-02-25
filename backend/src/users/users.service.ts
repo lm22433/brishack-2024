@@ -7,6 +7,7 @@ import {
 import { Response } from 'express';
 import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { GetUserDto } from './dto/get-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -28,7 +29,14 @@ export class UsersService {
       throw new UnauthorizedException('Password is incorrect');
     }
 
-    res.status(200).json({ message: 'Login successful.', userId: user.id });
+    const userDto: GetUserDto = {
+      userId: user.id.toString(),
+      username: user.username,
+      email: user.email,
+      name: user.name,
+    };
+
+    res.status(200).json(userDto);
   }
 
   async registerUser(
