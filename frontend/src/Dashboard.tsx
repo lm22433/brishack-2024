@@ -1,19 +1,16 @@
-import { useState } from "react"
 
-function Dashboard() {
-    const [count, setCount] = useState(0)
-  
-    return (
-      <>
-        <div></div>
-        <h1>Dashboard</h1>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            Dashboard count is {count}
-          </button>
-        </div>
-      </>
-    )
-  }
-  
-  export default Dashboard
+import Header from "./Header";
+import SidebarButton from "./SidebarButton";
+import React, { useState } from 'react';
+
+
+const Dashboard: React.FC = () => {
+  return (
+    <div>
+      <Header />
+      <SidebarButton /> 
+    </div>
+  );
+};
+
+export default Dashboard;

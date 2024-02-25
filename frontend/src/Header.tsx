@@ -1,24 +1,24 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Login from "./Login"
-import Leaderboard from "./Leaderboard"
-import Layout from "./Layout"
-import Dashboard from "./Dashboard";
-import NoPage from "./NoPage";
-import './App.css'
-import { useState } from "react";
+import React from 'react';
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import './Header.css';
+import Logo from './assets/Logo-removebg-preview.png';
 
 const Header = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  return (
+    <header className="header">
+      <div className="left">
+        <img src={Logo} alt="Logo"/>
+      </div>
+      <div className="middle">
+        Qwit
+      </div>
+      <div className="right">
+        <a href="https://www.facebook.com"><FaFacebook /></a>
+        <a href="https://www.twitter.com"><FaTwitter /></a>
+        <a href="https://www.instagram.com"><FaInstagram /></a>
+      </div>
+    </header>
+  );
+};
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen)
-    }
-    
-    return(
-        <header>
-            <div className="logo">
-                
-            </div>
-        </header>
-    )
-}
+export default Header;
