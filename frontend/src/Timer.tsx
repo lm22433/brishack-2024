@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 
+type TimerProps = {
+  initialTime: number;
+}
 
-function Timer(initialTime: number) {
+function Timer(inp: TimerProps) {
 
-        const [time, setTime] = useState(initialTime);
-        const [isRunning, setIsRunning] = useState(false);
+        const [time, setTime] = useState(inp.initialTime);
+        const [isRunning, setIsRunning] = useState(true);
         
         useEffect(() => {
             let interval: number | undefined;
@@ -25,7 +28,6 @@ function Timer(initialTime: number) {
         const seconds = time % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
-
         
     return (
         <div>

@@ -13,6 +13,7 @@ function Dashboard() {
     const [turkey, setTurkey] = useState(2)
     let index = getRandomInt(0,8)
     const [msg, setMsg] = useState(Messages[index])
+    const time = 60
 
     return (
         <>
@@ -20,7 +21,7 @@ function Dashboard() {
             <SidebarButton />
             <h1>Dashboard</h1>
             <h2>Profile Username Here</h2>
-            <div><Timer initialTime={60} /></div>
+            <Timer initialTime={time} />
             <div>{msg}</div>
             <div>
                 <a style={{textAlign: "center", margin: 50}}>Streak: {streak}</a>
