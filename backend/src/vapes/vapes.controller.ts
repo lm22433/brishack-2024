@@ -36,6 +36,11 @@ export class VapesController {
     return await this.vapesService.getWeeklyVapesByUserId(userId);
   }
 
+  @Get('/user/:userId/monthly')
+  async getMonthlyVapesByUserId(@Param('userId') userId: string) {
+    return await this.vapesService.getMonthlyVapesByUserId(userId);
+  }
+
   @Post()
   async createVape(@Body() createVapeDto: CreateVapeDto) {
     return await this.vapesService.createVape(

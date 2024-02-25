@@ -66,4 +66,15 @@ export class VapesService {
       },
     });
   }
+
+  async getMonthlyVapesByUserId(userId: string) {
+    return await this.prismaService.vape.findMany({
+      where: {
+        userId: parseInt(userId),
+        date: {
+          gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+        },
+      },
+    });
+  }
 }
