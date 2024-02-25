@@ -145,6 +145,7 @@ const ChartComponent = () => {
         <SidebarButton />
       </header>
       <main style={{ marginTop: "8rem" }}>
+      <h1>Statistics</h1>
         <div className="analyse">
           <div className="money">
             <h3>Money Spent</h3>
