@@ -14,4 +14,13 @@ model User {
   password String
   name String
   signUpDate DateTime @default(now())
+  vapes Vape[]
+}
+
+model Vape {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  duration Int
+  date DateTime @default(now())
 }
