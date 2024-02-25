@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import Header from "./Header";
@@ -23,7 +23,13 @@ function Login() {
         username: username,
         password: password,
       })
-      .then(() => (window.location.href = "/dashboard"))
+      .then((response) => {
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("username", response.data.username);
+        localStorage.setItem("email", response.data.email);
+        localStorage.setItem("name", response.data.name);
+        window.location.href = "/dashboard";
+      })
       .catch((err) => {
         setErrorMessage(err.response.data.error);
         setShowError(true);
