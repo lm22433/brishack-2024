@@ -41,6 +41,11 @@ export class VapesController {
     return await this.vapesService.getMonthlyVapesByUserId(userId);
   }
 
+  @Get('/user/:userId/clustered-daily')
+  async getClusteredDailyVapesByUserId(@Param('userId') userId: string) {
+    return await this.vapesService.getClusteredDailyVapesByUserId(userId);
+  }
+
   @Post()
   async createVape(@Body() createVapeDto: CreateVapeDto) {
     return await this.vapesService.createVape(
