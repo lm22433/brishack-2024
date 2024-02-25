@@ -5,6 +5,7 @@ import Layout from "./Layout"
 import Dashboard from "./Dashboard";
 import NoPage from "./NoPage";
 import './App.css'
+import Header from "./Header";
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+         <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard/>}></Route>
             <Route path="login" element={<Login />}></Route>
             <Route path="leaderboard" element={<Leaderboard />}></Route>
