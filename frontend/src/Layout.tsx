@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import "./App.css"
 
 function Layout() {
 
@@ -7,13 +8,13 @@ function Layout() {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Dashboard</Link>
+                        <Link to="/"><button>Dashboard</button></Link>
                     </li>
                     <li>
-                        <Link to="/login">Login</Link>
+                        <Link to="/login"><button>Login</button></Link>
                     </li>
                     <li>
-                        <Link to="/leaderboard">Leaderboard</Link>
+                        <Link to="/leaderboard"><button>Leaderboard</button></Link>
                     </li>
                 </ul>
             </nav>
