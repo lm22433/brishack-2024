@@ -17,6 +17,9 @@ function secondsToHoursAndMinutesFormatted(seconds: number): string {
 
 const ChartComponent = () => {
   const [latestTokeDateTimeSecs, setLatestTokeDateTimeSecs] = useState(0);
+  const [clusteredDailyVapes, setClusteredDailyVapes] = useState([
+    0, 0, 0, 0, 0, 0, 0,
+  ]);
 
   const [numberOfTokesDaily, setNumberOfTokesDaily] = useState(0);
   const [numberOfTokesWeekly, setNumberOfTokesWeekly] = useState(0);
@@ -38,6 +41,24 @@ const ChartComponent = () => {
 
           console.log("Time difference in seconds:", timeDifferenceSeconds);
           setLatestTokeDateTimeSecs(timeDifferenceSeconds);
+        });
+    };
+
+    const fetchClusteredDailyVapes = async () => {
+      await axios
+        .get(`http://localhost:3000/api/vapes/user/${userId}/clustered-daily`)
+        .then((res: any) => {
+          const days = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ];
+          const dataArray = days.map((day) => res.data[day]);
+          setClusteredDailyVapes(dataArray);
         });
     };
 
@@ -65,6 +86,8 @@ const ChartComponent = () => {
 
     fetchLatestTokeDateTime();
 
+    fetchClusteredDailyVapes();
+
     fetchNumberOfTokesDaily();
     fetchNumberOfTokesWeekly();
     fetchNumberOfTokesTotal();
@@ -72,18 +95,18 @@ const ChartComponent = () => {
 
   const chartData1 = {
     labels: [
+      "Sunday",
       "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
       "Saturday",
-      "Sunday",
     ],
     datasets: [
       {
         label: "# of Tokes",
-        data: [12, 19, 3, 5, 2, 3, 15],
+        data: clusteredDailyVapes,
         backgroundColor: ["rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(54, 162, 235, 1)"],
         borderWidth: 1,
