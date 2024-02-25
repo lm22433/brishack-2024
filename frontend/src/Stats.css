@@ -1,0 +1,29 @@
+main{
+    margin-top: 1.4rem;
+}
+
+main .analyse{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+}
+
+main .analyse > div{
+    background-color: #202528;
+    padding: 1.8rem;
+    margin-top: 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+ .chart-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .chart-container canvas {
+    width: 20%; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    margin: 10px; /* Add some margin between the charts */
+  } 
+  
