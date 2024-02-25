@@ -20,6 +20,8 @@ const ChartComponent = () => {
   const [clusteredDailyVapes, setClusteredDailyVapes] = useState([
     0, 0, 0, 0, 0, 0, 0,
   ]);
+  const [clusteredDailyNicotineLevels, setClusteredDailyNicotineLevels] =
+    useState([0, 0, 0, 0, 0, 0, 0]);
 
   const [numberOfTokesDaily, setNumberOfTokesDaily] = useState(0);
   const [numberOfTokesWeekly, setNumberOfTokesWeekly] = useState(0);
@@ -61,6 +63,28 @@ const ChartComponent = () => {
           setClusteredDailyVapes(dataArray);
         });
     };
+    const fetchClusteredDailyNicotineLevels = async () => {
+      await axios
+        .get(
+          `http://localhost:3000/api/vapes/user/${userId}/clustered-daily-durations`
+        )
+        .then((res: any) => {
+          const days = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ];
+          let dataArray = days.map((day) => res.data[day]);
+          dataArray = dataArray.map((duration) =>
+            ((duration / 3000) * 20).toFixed(2)
+          );
+          setClusteredDailyNicotineLevels(dataArray);
+        });
+    };
 
     const fetchNumberOfTokesDaily = async () => {
       await axios
@@ -87,6 +111,7 @@ const ChartComponent = () => {
     fetchLatestTokeDateTime();
 
     fetchClusteredDailyVapes();
+    fetchClusteredDailyNicotineLevels();
 
     fetchNumberOfTokesDaily();
     fetchNumberOfTokesWeekly();
@@ -116,18 +141,18 @@ const ChartComponent = () => {
 
   const chartData2 = {
     labels: [
+      "Sunday",
       "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
       "Saturday",
-      "Sunday",
     ],
     datasets: [
       {
         label: "Nicotine Intake (mg)",
-        data: [5, 0, 1, 2, 8, 7, 3],
+        data: clusteredDailyNicotineLevels,
         backgroundColor: ["rgba(213,87,247,0.2)"],
         borderColor: ["rgba(213,87,247,1)"],
         borderWidth: 1,
@@ -168,7 +193,7 @@ const ChartComponent = () => {
         <SidebarButton />
       </header>
       <main style={{ marginTop: "8rem" }}>
-      <h1>Statistics</h1>
+        <h1>Statistics</h1>
         <div className="analyse">
           <div className="money">
             <h3>Money Spent</h3>
