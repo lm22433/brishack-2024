@@ -10,15 +10,9 @@ const Header = () => {
       </div>
       <div className="middle">Qwit</div>
       <div className="right">
-        <a href="https://www.facebook.com">
-          <FaFacebook />
-        </a>
-        <a href="https://www.twitter.com">
-          <FaTwitter />
-        </a>
-        <a href="https://www.instagram.com">
-          <FaInstagram />
-        </a>
+        <a href="https://www.facebook.com"><FaFacebook /></a>
+        <a href="https://www.twitter.com"><FaTwitter /></a>
+        <a href="https://www.instagram.com"><FaInstagram /></a>
       </div>
     </header>
   );
