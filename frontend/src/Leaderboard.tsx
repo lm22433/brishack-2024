@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TestData1 } from "./TestData"
+import { TestData1, TestData2 } from "./TestData"
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart as ChartJS} from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
@@ -15,10 +15,15 @@ function Leaderboard() {
                 data: TestData1.map((data) => data.novapes),
                 backgroundColor: [
                     "rgba(75,192,192,1)",
-                    "#ecf0f1",
-                    "#50AF95",
-                    "#f3ba2f",
-                    "#2a71d0",
+                ],
+                borderColor: "black",
+                borderWidth: 2,
+            },
+            {
+                label: "Person 2 : number of vapes",
+                data: TestData2.map((data) => data.novapes),
+                backgroundColor: [
+                    "rgba(123,160,18,1)",
                 ],
                 borderColor: "black",
                 borderWidth: 2,
