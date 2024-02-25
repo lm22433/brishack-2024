@@ -2,6 +2,8 @@ import { useState } from "react"
 import { TestData1, TestData2 } from "./TestData"
 import { Bar, Line } from "react-chartjs-2";
 import { CategoryScale, Chart as ChartJS} from "chart.js/auto";
+import Header from "./Header";
+import SidebarButton from "./SidebarButton";
 
 ChartJS.register(CategoryScale)
 
@@ -72,15 +74,21 @@ function Leaderboard() {
   
     return (
       <>
-        <div className="Leaderboard">
-            <h1>LeaderBoard</h1>
-            <div style={{ width: 700}}>
-                <Line data={testData} />
+        <header>
+            <Header />
+            <SidebarButton />
+        </header>
+        <body>
+            <div className="Leaderboard">
+                <h1>LeaderBoard</h1>
+                <div style={{ width: 700}}>
+                    <Line data={testData} />
+                </div>
+                <div style={{ width: 700}}>
+                    <Bar data={streakData} />
+                </div>
             </div>
-            <div style={{ width: 700}}>
-                <Bar data={streakData} />
-            </div>
-        </div>
+        </body>
       </>
     )
   }
