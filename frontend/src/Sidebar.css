@@ -19,6 +19,10 @@
   font-size: 16px;
 }
 
+.nhs-link:hover {
+  color: inherit; /* Use the default color on hover */
+}
+
 .sidebar a {
   text-decoration: none;
   color: white;
