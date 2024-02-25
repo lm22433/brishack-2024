@@ -16,6 +16,7 @@ const Sidebar: React.FC = () => {
       <Link to="../stats">
         <button>Statistics</button>
       </Link>
+      <button><a href="https://www.nhs.uk/better-health/quit-smoking/vaping-to-quit-smoking/#:~:text=To%20keep%20yourself%20on%20track,extend%20the%20time%20between%20vaping">NHS Advice</a></button>
       <Link to="../login">
         <button
           onClick={() => {
