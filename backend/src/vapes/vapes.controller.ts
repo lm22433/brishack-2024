@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { VapesService } from './vapes.service';
+import { CreateVapeDto } from './dto/create-vape.dto';
 
 @Controller('api/vapes')
 export class VapesController {
@@ -18,5 +19,13 @@ export class VapesController {
   @Get('/user/:userId')
   async getVapesByUserId(@Param('userId') userId: string) {
     return await this.vapesService.getVapesByUserId(userId);
+  }
+
+  @Post()
+  async createVape(@Body() createVapeDto: CreateVapeDto) {
+    return await this.vapesService.createVape(
+      createVapeDto.userId,
+      createVapeDto.duration,
+    );
   }
 }

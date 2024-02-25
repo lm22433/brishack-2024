@@ -24,4 +24,13 @@ export class VapesService {
       },
     });
   }
+
+  async createVape(userId: string, duration: string) {
+    return await this.prismaService.vape.create({
+      data: {
+        userId: parseInt(userId),
+        duration: parseInt(duration),
+      },
+    });
+  }
 }
