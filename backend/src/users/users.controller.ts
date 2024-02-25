@@ -1,5 +1,13 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  NotFoundException,
+  Post,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
+import { Response } from 'express';
 import { LoginUserDto } from './dto/login-user.dto';
 import { RegisterUserDto } from './dto/register-user.dto';
 
@@ -8,11 +16,23 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post('/login')
-  async loginUser(@Body() loginUserDto: LoginUserDto) {
-    return await this.userService.loginUser(
-      loginUserDto.username,
-      loginUserDto.password,
-    );
+  async loginUser(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
+    try {
+      await this.userService.loginUser(
+        loginUserDto.username,
+        loginUserDto.password,
+        res,
+      );
+    } catch (error) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof UnauthorizedException
+      ) {
+        res.status(error.getStatus()).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    }
   }
 
   @Post('/register')
