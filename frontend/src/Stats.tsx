@@ -76,13 +76,12 @@ const ChartComponent = () => {
   };
 
   return (
-    <div>
+    <>
       <header>
         <Header />
         <SidebarButton />
       </header>
-      <body>
-        <main>
+      <main style={{ marginTop: '8rem' }}>
           <div className="analyse">
             <div className="longestStreak">
               <div className="info">
@@ -124,8 +123,7 @@ const ChartComponent = () => {
           <Bar data={chartData1} options={chartOptions} />
           <Bar data={chartData2} options={chartOptions} />
         </div>
-      </body>
-    </div>
+    </>
   );
 };
 
