@@ -24,4 +24,57 @@ export class VapesService {
       },
     });
   }
+
+  async createVape(userId: string, duration: string) {
+    return await this.prismaService.vape.create({
+      data: {
+        userId: parseInt(userId),
+        duration: parseInt(duration),
+      },
+    });
+  }
+
+  async getLastVapeByUserId(userId: string) {
+    return await this.prismaService.vape.findFirst({
+      where: {
+        userId: parseInt(userId),
+      },
+      orderBy: {
+        date: 'desc',
+      },
+    });
+  }
+
+  async getDailyVapesByUserId(userId: string) {
+    return await this.prismaService.vape.findMany({
+      where: {
+        userId: parseInt(userId),
+        date: {
+          gte: new Date(new Date().setHours(0, 0, 0, 0)),
+        },
+      },
+    });
+  }
+
+  async getWeeklyVapesByUserId(userId: string) {
+    return await this.prismaService.vape.findMany({
+      where: {
+        userId: parseInt(userId),
+        date: {
+          gte: new Date(new Date().setDate(new Date().getDate() - 7)),
+        },
+      },
+    });
+  }
+
+  async getMonthlyVapesByUserId(userId: string) {
+    return await this.prismaService.vape.findMany({
+      where: {
+        userId: parseInt(userId),
+        date: {
+          gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+        },
+      },
+    });
+  }
 }
