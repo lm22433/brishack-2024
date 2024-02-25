@@ -39,7 +39,7 @@ function Login() {
   return (
     <>
       <Header />
-      <body>
+      <body className="bodyy">
         <div className="loginContainer">
           <h1>Login</h1>
           <div>

@@ -19,6 +19,15 @@
   font-size: 16px;
 }
 
+.nhs-link:hover {
+  color: inherit; /* Use the default color on hover */
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: white;
+}
+
 .sidebar .top {
   margin-top: 50px;
   display: block;
@@ -30,4 +39,8 @@
 
 .sidebar button:hover {
   text-decoration: none;
+}
+
+.logout{
+  margin-top: 19rem;
 }
