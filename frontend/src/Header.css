@@ -30,6 +30,7 @@
 .middle {
   flex: 2;
   text-align: center;
+  margin-left: 215px;
   font-size: 40px;
   font-weight: bold;
 }
@@ -49,6 +50,7 @@
 
 .right a svg {
   font-size: 40px;
+  color: #73a3da;
 }
 
 /* .logo {
