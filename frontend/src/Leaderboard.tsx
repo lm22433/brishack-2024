@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { TestData1, TestData2 } from "./TestData";
 import { Bar, Line } from "react-chartjs-2";
 import { CategoryScale, Chart as ChartJS } from "chart.js/auto";
 import Header from "./Header";
@@ -60,8 +59,8 @@ function Leaderboard() {
       },
     ],
   });
-  const [dataSets, setDataSets] = useState<Struct[][]>([[], []]);
-  const [testStreaks, setTestStreaks] = useState([0, 0]);
+  const [dataSets, setDataSets] = useState<Struct[][]>([[], [], []]);
+  const [testStreaks, setTestStreaks] = useState([0, 0, 0]);
   const [streakData, setStreakData] = useState({
     labels: ["Person 1", "Person 2"],
     datasets: [
@@ -110,9 +109,16 @@ function Leaderboard() {
             borderColor: "rgba(213,87,247,1)",
             borderWidth: 2,
           },
+          {
+            label: "Person 3 : Number of Tokes",
+            data: leaderboardData[2].map((data) => data.novapes),
+            backgroundColor: ["rgba(3,252,115,0.2)"],
+            borderColor: "rgba(3,252,115,1)",
+            borderWidth: 2,
+          },
         ],
       });
-      setDataSets([leaderboardData[0], leaderboardData[1]]);
+      setDataSets([leaderboardData[0], leaderboardData[1], leaderboardData[2]]);
 
       let streaks = [];
       for (let i = 0; i < testStreaks.length; i++) {
@@ -120,7 +126,7 @@ function Leaderboard() {
       }
       setTestStreaks(streaks);
       setStreakData({
-        labels: ["Person 1", "Person 2"],
+        labels: ["Person 1", "Person 2", "Person 3"],
         datasets: [
           {
             label: "Longest Streak",
