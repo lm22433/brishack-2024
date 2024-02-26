@@ -136,7 +136,7 @@ const ChartComponent = () => {
         data: clusteredDailyVapes,
        // backgroundColor: ["rgba(54, 162, 235, 0.2)"],
         backgroundColor: clusteredDailyVapes.map((value, index) => {
-            const opacity = index === currentDayIndex ? 1 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
+            const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
             return `rgba(54, 162, 235, ${opacity})`;
         }),
         borderColor: ["rgba(54, 162, 235, 1)"],
