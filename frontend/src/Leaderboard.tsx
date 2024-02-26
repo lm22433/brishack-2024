@@ -32,6 +32,14 @@ function GetStreak(indata: any[]) {
 }
 
 function Leaderboard() {
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            window.location.reload();
+        }, 60000);
+        return () => clearInterval(interval);
+      }, []);
+
   const [leaderboardData, setLeaderboardData] = useState<Struct[][]>([[], []]);
   const [testData, setTestData] = useState({
     labels: leaderboardData[0].map((data) => data.day),
