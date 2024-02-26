@@ -51,7 +51,7 @@ datasets: [
   });
 
   const [testStreaks, setTestStreaks] = useState([0, 0]);
-  const [dataSets, setDataSets] = useState([TestData1, TestData2]);
+  const [dataSets, setDataSets] = useState([objs[0], objs[1]]);
 
   for (let i = 0; i < testStreaks.length; i++) {
     testStreaks[i] = GetStreak(dataSets[i]);
