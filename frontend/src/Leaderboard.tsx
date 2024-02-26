@@ -168,12 +168,6 @@ function Leaderboard() {
       <body>
         <div className="Leaderboard">
           <h1>Leaderboard</h1>
-          <div className="linechart">
-            <Line data={testData} options={chartOptions} />
-          </div>
-          <div className="barchart">
-            <Bar data={streakData} options={chartOptions} />
-          </div>
           <div className="leaderboardTable">
             <table>
                 <tr>
@@ -198,6 +192,12 @@ function Leaderboard() {
                     )
                 })}
             </table>
+          </div>
+          <div className="linechart">
+            <Line data={testData} options={chartOptions} />
+          </div>
+          <div className="barchart">
+            <Bar data={streakData} options={chartOptions} />
           </div>
         </div>
       </body>
