@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react"
 import Confetti from "react-confetti"
 
-type TimerProps = {
+type TimerProperties = {
   initialTime: number;
 }
 
-function Timer(inp: TimerProps) {
+function Timer(inp: TimerProperties) {
 
+    //time left in the timer
     const [time, setTime] = useState(inp.initialTime);
+    //stores whether the timer is paused or not
     const [isRunning, setIsRunning] = useState(true);
+    //used for input of a new time
     const [newTime, setNewTime] = useState('');
+    //boolean for whether timer is finished or not
     const [timerReachedZero, setTimerReachedZero] = useState(false);
 
+    //when the timer runs out flip the necessary variables
     useEffect(() => {
       if (time === 0) {
         setTimerReachedZero(true)
@@ -19,6 +24,8 @@ function Timer(inp: TimerProps) {
       }
     }, [time]);
 
+    //when a second has passed if the timer is running decrement
+    //the timer by a second
     useEffect(() => {
       let interval: number | undefined;
       if (isRunning) {
@@ -28,18 +35,21 @@ function Timer(inp: TimerProps) {
       }
       return () => clearInterval(interval);
     }, [isRunning]);
-      
-    const handlePausePlay = () => {
+    
+    //flip paused or played
+    const pause = () => {
       setIsRunning(prevIsRunning => !prevIsRunning);
     };
 
-    const handleReset = () => {
+    //reset the timer to the new time inputted
+    const reset = () => {
       setTime(parseInt(newTime, 10));
       setNewTime('')
       setTimerReachedZero(false)
     }
-        
-    const formatTime = (time: number) => {
+    
+    //format the return string
+    const format = (time: number) => {
         const minutes = Math.floor(time / 60);
         const seconds = time % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -49,14 +59,14 @@ function Timer(inp: TimerProps) {
         <div>
           {timerReachedZero ? (
         <Confetti width={window.innerWidth} height={window.innerHeight} />) : null}
-            <h1>Timer: {formatTime(time)}</h1>
-            <button onClick={handlePausePlay}>{isRunning ? 'Pause' : 'Play'}</button>
+            <h1>Timer: {format(time)}</h1>
+            <button onClick={pause}>{isRunning ? 'Pause' : 'Play'}</button>
             <input
               type="number"
               value={newTime}
               onChange={(e) => setNewTime(e.target.value)}
               placeholder="Set New Timer" />
-            <button onClick={handleReset}>Reset</button>
+            <button onClick={reset}>Reset</button>
         </div>
     );
 };
