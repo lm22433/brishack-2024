@@ -63,7 +63,7 @@ function calculateDiff(first: Date, last: Date) {
 }
 
 async function GenerateLeaderboardData() : Promise<Struct[][]> {
-    await axios.get("https://localhost/api/vapes").then((response) => {
+    await axios.get("http://localhost:3000/api/vapes").then((response) => {
         const vapes: Struct2[] = response.data;
         const datasets: Struct[][] = []
         datasets.push(generate(vapes.filter((vape) => vape.userId === 1)))
