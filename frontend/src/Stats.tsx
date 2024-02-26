@@ -10,6 +10,18 @@ ChartJS.register(CategoryScale);
 
 const currentDayIndex = new Date().getDay();
 
+type VapeData = {
+  id: number;
+  userId: number;
+  duration: number;
+  date: string;
+};
+
+function allVapesToAverageDuration(vapeData: VapeData[]) {
+  const totalDuration = vapeData.reduce((acc, vape) => acc + vape.duration, 0);
+  return (totalDuration / vapeData.length / 1000).toFixed(2);
+}
+
 function secondsToHoursAndMinutesFormatted(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const remainingSeconds = seconds % 3600;
@@ -28,6 +40,8 @@ const ChartComponent = () => {
   const [numberOfTokesDaily, setNumberOfTokesDaily] = useState(0);
   const [numberOfTokesWeekly, setNumberOfTokesWeekly] = useState(0);
   const [numberOfTokesTotal, setNumberOfTokesTotal] = useState(0);
+
+  const [allVapes, setAllVapes] = useState([]);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -110,6 +124,14 @@ const ChartComponent = () => {
         });
     };
 
+    const fetchAllVapes = async () => {
+      await axios
+        .get(`http://localhost:3000/api/vapes/user/${userId}`)
+        .then((res: any) => {
+          setAllVapes(res.data);
+        });
+    };
+
     fetchLatestTokeDateTime();
 
     fetchClusteredDailyVapes();
@@ -118,6 +140,8 @@ const ChartComponent = () => {
     fetchNumberOfTokesDaily();
     fetchNumberOfTokesWeekly();
     fetchNumberOfTokesTotal();
+
+    fetchAllVapes();
   }, []);
 
   const chartData1 = {
@@ -135,8 +159,8 @@ const ChartComponent = () => {
         label: "# of Tokes",
         data: clusteredDailyVapes,
         backgroundColor: clusteredDailyVapes.map((value, index) => {
-            const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
-            return `rgba(54, 162, 235, ${opacity})`;
+          const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
+          return `rgba(54, 162, 235, ${opacity})`;
         }),
         borderColor: ["rgba(54, 162, 235, 1)"],
         borderWidth: 1,
@@ -159,8 +183,8 @@ const ChartComponent = () => {
         label: "Nicotine Intake (mg)",
         data: clusteredDailyNicotineLevels,
         backgroundColor: clusteredDailyVapes.map((value, index) => {
-            const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
-            return `rgba(213,87,247, ${opacity})`;
+          const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
+          return `rgba(213,87,247, ${opacity})`;
         }),
         borderColor: ["rgba(213,87,247,1)"],
         borderWidth: 1,
@@ -212,8 +236,8 @@ const ChartComponent = () => {
             <h2>{secondsToHoursAndMinutesFormatted(latestTokeDateTimeSecs)}</h2>
           </div>
           <div className="longestStreak">
-            <h3>Longest Streak</h3>
-            <h2>4 days</h2>
+            <h3>Average Toke Time</h3>
+            <h2>{allVapesToAverageDuration(allVapes)} Seconds</h2>
           </div>
           <div className="todayTokes">
             <h3>Tokes Today</h3>
