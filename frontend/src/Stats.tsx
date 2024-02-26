@@ -52,7 +52,7 @@ const ChartComponent = () => {
   }, []);
 
   const manualRefresh = () => {
-    setRefreshCounter(refreshCounter + 1);
+    window.location.reload();
   };
 
   const [allVapes, setAllVapes] = useState([]);
