@@ -192,12 +192,12 @@ function Leaderboard() {
               {data.map((val, key) => {
                 return (
                   <tr key={key}>
-                    <td>{val.rank}</td>
+                    <td>{key + 1}</td>
                     <td>{val.username}</td>
                     <td>{val.name}</td>
                     <td>{val.tokeCount}</td>
                     <td>{(val.averageTokeTime / 1000).toFixed(2)}</td>
-                    <td>{(val.moneySpent).toFixed(2)}</td>
+                    <td>{val.moneySpent.toFixed(2)}</td>
                   </tr>
                 );
               })}

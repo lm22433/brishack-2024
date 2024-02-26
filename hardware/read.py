@@ -7,7 +7,7 @@ API_ENDPOINT_URL='http://localhost:3000/api/vapes/'
 
 ser = serial.Serial('/dev/cu.usbmodem1101', 9600)
 
-light_off_threshold = 60500
+light_off_threshold = 60000
 light_on_threshold = 58500
 
 light_on = False
