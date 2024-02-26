@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 ChartJS.register(CategoryScale);
 
+const currentDayIndex = new Date().getDay();
+
 function secondsToHoursAndMinutesFormatted(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const remainingSeconds = seconds % 3600;
@@ -132,7 +134,11 @@ const ChartComponent = () => {
       {
         label: "# of Tokes",
         data: clusteredDailyVapes,
-        backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+       // backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+        backgroundColor: clusteredDailyVapes.map((value, index) => {
+            const opacity = index === currentDayIndex ? 1 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
+            return `rgba(54, 162, 235, ${opacity})`;
+        }),
         borderColor: ["rgba(54, 162, 235, 1)"],
         borderWidth: 1,
       },
