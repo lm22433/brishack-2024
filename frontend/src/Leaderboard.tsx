@@ -186,8 +186,8 @@ function Leaderboard() {
                 <th>Username</th>
                 <th>Name</th>
                 <th>Number of Tokes</th>
-                <th>Mean Toke Times</th>
-                <th>Total Money Spent</th>
+                <th>Mean Toke Times (s)</th>
+                <th>Total Money Spent (£)</th>
               </tr>
               {data.map((val, key) => {
                 return (
