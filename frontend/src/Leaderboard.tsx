@@ -6,6 +6,7 @@ import { CategoryScale, Chart as ChartJS} from "chart.js/auto";
 import Header from "./Header";
 import SidebarButton from "./SidebarButton";
 import "./Leaderboard.css";
+import GenerateLeaderboardData from "./GenerateLeaderboardData";
 
 
 ChartJS.register(CategoryScale)
@@ -27,13 +28,16 @@ function GetStreak(indata: any[]) {
     return maxStreak;
 }
 
+const objs = GenerateLeaderboardData()
+console.log(objs);
+
 function Leaderboard() {
     const [testData, setTestData] = useState({
-        labels: TestData1.map((data) => data.day),
+        labels: objs[0].map((data) => data.day),
         datasets: [
             {
                 label: "Person 1 : Number of Tokes",
-                data: TestData1.map((data) => data.novapes),
+                data: objs[1].map((data) => data.novapes),
                 backgroundColor: [
                     "rgba(54,162,235,0.2)",
                 ],
@@ -42,7 +46,7 @@ function Leaderboard() {
             },
             {
                 label: "Person 2 : Number of Tokes",
-                data: TestData2.map((data) => data.novapes),
+                data: objs[0].map((data) => data.novapes),
                 backgroundColor: [
                     "rgba(213,87,247,0.2)",
                 ],
@@ -52,8 +56,9 @@ function Leaderboard() {
         ],
     });
 
+
     const [testStreaks, setTestStreaks] = useState([0,0])
-    const [dataSets, setDataSets] = useState([TestData1, TestData2])
+    const [dataSets, setDataSets] = useState([TestData1, objs])
 
     for (let i = 0; i < testStreaks.length; i++) {
         testStreaks[i] = GetStreak(dataSets[i])

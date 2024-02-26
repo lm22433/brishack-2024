@@ -62,11 +62,11 @@ export const TestData2 = [
         day: 5,
         novapes: 4,
     },
-    {
+   /* {
         id: 6,
         day: 6,
         novapes: 4,
-    },
+    },*/
     {
         id: 7,
         day: 7,
