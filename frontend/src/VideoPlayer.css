@@ -1,0 +1,44 @@
+.video-container {
+  width: 200px; /* Adjust width as needed */
+  height: 200px; /* Adjust height as needed */
+  border-radius: 50%; /* Make it a circle */
+  overflow: hidden; /* Hide overflow content */
+  position: relative; /* Position relative for absolute positioning */
+  margin: auto;
+  border-color: black;
+  border: 2px solid black;
+}
+
+.video {
+  width: 100%; /* Make video fill container */
+  height: 100%; /* Make video fill container */
+  object-fit: cover; /* Cover the entire area of the circular container */
+  position: absolute; /* Position absolute to place the video within the container */
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+}
+
+.circular-timer {
+  position: relative;
+  width: 150px; /* Increase width for tomato shape */
+  height: 150px; /* Increase height for tomato shape */
+  border-radius: 50%; /* Make it a circle */
+  
+}
+
+.timer-path {
+  stroke: #5cb85c; /* Green color for timer progress */
+  transition: stroke-dashoffset 1s linear; /* Smooth transition */
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px; /* Larger font size */
+  font-weight: bold; /* Bold text */
+  color: #d9534f; /* Dark red color */
+}
+
