@@ -19,9 +19,7 @@ function Dashboard() {
     <>
       <Header />
       <SidebarButton />
-      <h1 style={{margin: 100}}>Dashboard</h1>
-      <h2>Username: {localStorage.getItem("username")}</h2>
-      <h2>Name: {localStorage.getItem("name")}</h2>
+      <h1 style={{margin: 100}}>{localStorage.getItem("name")}'s Dashboard</h1>
       <Timer initialTime={time} />
       <div>{msg}</div>
       <div>
