@@ -1,11 +1,16 @@
-import { element } from "prop-types";
+import axios from "axios";
 
 type Struct = {
     day: number,
     novapes: number
 }
 
-function generate(testVapes: {date:string,userId:number}[]) {
+type Struct2 = {id: number, 
+    userId: number, 
+    duration: number, 
+    date: string}
+
+function generate(testVapes: Struct2[]) {
 
     const first = new Date(testVapes[0].date)
     const last = new Date(testVapes[testVapes.length-1].date)
@@ -57,25 +62,16 @@ function calculateDiff(first: Date, last: Date) {
     return daysDiff;
 }
 
-function GenerateLeaderboardData() {
-
-    const testVapes = [{date: "2024-01-12", userId: 1},
-                    {date: "2024-01-12", userId: 1},
-                    {date: "2024-01-13", userId: 1},
-                    {date: "2024-01-15", userId: 1},
-                    {date: "2024-01-18", userId: 1},
-                    {date: "2024-01-12", userId: 2},
-                    {date: "2024-01-13", userId: 2},
-                    {date: "2024-01-13", userId: 2},
-                    {date: "2024-01-14", userId: 2},
-                    {date: "2024-01-18", userId: 2},
-                    {date: "2024-01-18", userId: 2},]
-
-    const datasets: Struct[][] = []
-    datasets.push(generate(testVapes.filter((vape) => vape.userId === 1)))
-    datasets.push(generate(testVapes.filter((vape) => vape.userId === 2)))
-
-    return(datasets)
+async function GenerateLeaderboardData() : Promise<Struct[][]> {
+    await axios.get("https://localhost/api/vapes").then((response) => {
+        const vapes: Struct2[] = response.data;
+        const datasets: Struct[][] = []
+        datasets.push(generate(vapes.filter((vape) => vape.userId === 1)))
+        datasets.push(generate(vapes.filter((vape) => vape.userId === 2)))
+    
+        return(datasets)
+})
+return []
 }
 
 export default GenerateLeaderboardData

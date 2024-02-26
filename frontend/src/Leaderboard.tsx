@@ -26,7 +26,7 @@ function GetStreak(indata: any[]) {
   return maxStreak;
 }
 
-const objs = GenerateLeaderboardData()
+const objs = await GenerateLeaderboardData()
 console.log(objs);
 
 function Leaderboard() {
