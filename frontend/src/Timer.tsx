@@ -92,13 +92,15 @@ function Timer(inp: TimerProperties) {
       <button onClick={pause} style={{ margin: 10 }}>
         {isRunning ? "Pause" : "Play"}
       </button>
+      <button onClick={reset}>Reset</button>
+
       <input
         type="number"
         value={newTime}
         onChange={(e) => setNewTime(e.target.value)}
         placeholder="Set New Timer"
+        style={{ width: 400 }}
       />
-      <button onClick={reset}>Reset</button>
     </div>
   );
 }
