@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Confetti from "react-confetti"
-import CircularTimer from "./CircularTimer";
+import Video from "./assets/QwitVideo.mp4"; // Import your video file
+import "./CircularTimer.css"
 
 type TimerProperties = {
   initialTime: number;
@@ -55,13 +56,39 @@ function Timer(inp: TimerProperties) {
         const seconds = time % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
+
+      // Calculate the dash array and dash offset for the SVG circle
+    const radius = 40;
+    const circumference = 2 * Math.PI * radius;
+    const dashArray = circumference;
+    const dashOffset = ((inp.initialTime - time) / inp.initialTime) * circumference;
         
     return (
         <div>
           {timerReachedZero ? (
         <Confetti width={window.innerWidth} height={window.innerHeight} />) : null}
             <h1>Timer: {format(time)}</h1>
-            <button onClick={pause}>{isRunning ? 'Pause' : 'Play'}</button>
+            <div className="video-container">
+              <video autoPlay loop muted className="video">
+                <source src={Video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <svg viewBox="0 0 100 100" className="timer-svg">
+                <circle
+                  className="timer-path"
+                  cx="50"
+                  cy="50"
+                  r={radius}
+                  fill="none"
+                  stroke="#00ff00" // Green color
+                  strokeWidth="5"
+                  strokeDasharray={dashArray}
+                  strokeDashoffset={dashOffset}
+                  transform="rotate(-90, 50, 50)"
+                />
+              </svg>
+            </div>
+            <button onClick={pause} style={{margin: 10}}>{isRunning ? 'Pause' : 'Play'}</button>
             <input
               type="number"
               value={newTime}
