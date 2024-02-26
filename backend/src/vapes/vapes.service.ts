@@ -6,7 +6,11 @@ export class VapesService {
   constructor(private prismaService: PrismaService) {}
 
   async getVapes() {
-    return await this.prismaService.vape.findMany();
+    return await this.prismaService.vape.findMany({
+      orderBy: {
+        date: 'asc',
+      },
+    });
   }
 
   async getVapeById(id: string) {
@@ -21,6 +25,9 @@ export class VapesService {
     return await this.prismaService.vape.findMany({
       where: {
         userId: parseInt(userId),
+      },
+      orderBy: {
+        date: 'asc',
       },
     });
   }

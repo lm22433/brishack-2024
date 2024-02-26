@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TestData1, TestData2 } from "./TestData";
 import { Bar, Line } from "react-chartjs-2";
 import { CategoryScale, Chart as ChartJS } from "chart.js/auto";
@@ -6,6 +6,11 @@ import Header from "./Header";
 import SidebarButton from "./SidebarButton";
 import "./Leaderboard.css";
 import GenerateLeaderboardData from "./GenerateLeaderboardData";
+
+type Struct = {
+  day: number;
+  novapes: number;
+};
 
 ChartJS.register(CategoryScale);
 
@@ -26,37 +31,29 @@ function GetStreak(indata: any[]) {
   return maxStreak;
 }
 
-const objs = await GenerateLeaderboardData()
-console.log(objs);
-
 function Leaderboard() {
-const [testData, setTestData] = useState({
-labels: objs[0].map((data) => data.day),
-datasets: [
-    {
-    label: "Person 1 : Number of Tokes",
-    data: objs[0].map((data) => data.novapes),
-    backgroundColor: ["rgba(54,162,235,0.2)"],
-    borderColor: "rgba(54,162,235,1)",
-    borderWidth: 2,
-  },
-  {
-    label: "Person 2 : Number of Tokes",
-    data: objs[1].map((data) => data.novapes),
-    backgroundColor: ["rgba(213,87,247,0.2)"],
-    borderColor: "rgba(213,87,247,1)",
-    borderWidth: 2,
-    },
+  const [leaderboardData, setLeaderboardData] = useState<Struct[][]>([[], []]);
+  const [testData, setTestData] = useState({
+    labels: leaderboardData[0].map((data) => data.day),
+    datasets: [
+      {
+        label: "Person 1 : Number of Tokes",
+        data: leaderboardData[0].map((data) => data.novapes),
+        backgroundColor: ["rgba(54,162,235,0.2)"],
+        borderColor: "rgba(54,162,235,1)",
+        borderWidth: 2,
+      },
+      {
+        label: "Person 2 : Number of Tokes",
+        data: leaderboardData[1].map((data) => data.novapes),
+        backgroundColor: ["rgba(213,87,247,0.2)"],
+        borderColor: "rgba(213,87,247,1)",
+        borderWidth: 2,
+      },
     ],
   });
-
+  const [dataSets, setDataSets] = useState<Struct[][]>([[], []]);
   const [testStreaks, setTestStreaks] = useState([0, 0]);
-  const [dataSets, setDataSets] = useState([objs[0], objs[1]]);
-
-  for (let i = 0; i < testStreaks.length; i++) {
-    testStreaks[i] = GetStreak(dataSets[i]);
-  }
-
   const [streakData, setStreakData] = useState({
     labels: ["Person 1", "Person 2"],
     datasets: [
@@ -69,6 +66,53 @@ datasets: [
       },
     ],
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const objs = await GenerateLeaderboardData();
+      setLeaderboardData(objs);
+      setTestData({
+        labels: leaderboardData[0].map((data) => data.day),
+        datasets: [
+          {
+            label: "Person 1 : Number of Tokes",
+            data: leaderboardData[0].map((data) => data.novapes),
+            backgroundColor: ["rgba(54,162,235,0.2)"],
+            borderColor: "rgba(54,162,235,1)",
+            borderWidth: 2,
+          },
+          {
+            label: "Person 2 : Number of Tokes",
+            data: leaderboardData[1].map((data) => data.novapes),
+            backgroundColor: ["rgba(213,87,247,0.2)"],
+            borderColor: "rgba(213,87,247,1)",
+            borderWidth: 2,
+          },
+        ],
+      });
+      setDataSets([leaderboardData[0], leaderboardData[1]]);
+
+      let streaks = [];
+      for (let i = 0; i < testStreaks.length; i++) {
+        streaks.push(GetStreak(dataSets[i]));
+      }
+      setTestStreaks(streaks);
+      setStreakData({
+        labels: ["Person 1", "Person 2"],
+        datasets: [
+          {
+            label: "Longest Streak",
+            data: testStreaks,
+            backgroundColor: ["rgba(54,162,235,0.2)", "rgba(213,87,247,0.2)"],
+            borderColor: ["rgba(54,162,235,1)", "rgba(213,87,247,1)"],
+            borderWidth: 2,
+          },
+        ],
+      });
+    };
+
+    fetchData();
+  }, [dataSets, leaderboardData, testStreaks]);
 
   const chartOptions = {
     maintainAspectRatio: true, // Ensure the aspect ratio is maintained
