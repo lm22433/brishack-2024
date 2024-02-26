@@ -19,7 +19,7 @@ function Dashboard() {
     <>
       <Header />
       <SidebarButton />
-      <h1 style={{ margin: 100 }}>
+      <h1 style={{ marginTop: 90, marginBottom: 10}}>
         {localStorage.getItem("name")}'s Dashboard
       </h1>
       <Timer initialTime={time} />
