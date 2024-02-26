@@ -75,6 +75,20 @@ function Leaderboard() {
     ],
   });
 
+  const data = [
+    {rank: 1, username: "bla", name: "Harry", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 2, username: "bla", name: "Bagga", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 3, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 4, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 5, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 6, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 7, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 8, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 9, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+    {rank: 10, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+
+]
+
   useEffect(() => {
     const fetchData = async () => {
       const objs = await GenerateLeaderboardData();
@@ -162,10 +176,37 @@ function Leaderboard() {
       <body>
         <div className="Leaderboard">
           <h1>Leaderboard</h1>
+          <div className="leaderboardTable">
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Number of Tokes</th>
+                    <th>Mean Toke Times</th>
+                    <th>Total Money Spent</th>
+
+                </tr>
+                {data.map((val, key) => {
+                    return (
+                        <tr key={key}>
+                            <td>{val.rank}</td>
+                            <td>{val.username}</td>
+                            <td>{val.name}</td>
+                            <td>{val.tokes}</td>
+                            <td>{val.avgTime}</td>
+                            <td>{val.money}</td>
+                        </tr>
+                    )
+                })}
+            </table>
+          </div>
           <div className="linechart">
+            <h1>Daily Tokes Comparison</h1>
             <Line data={testData} options={chartOptions} />
           </div>
           <div className="barchart">
+            <h1>Longest Streak Comparison</h1>
             <Bar data={streakData} options={chartOptions} />
           </div>
         </div>

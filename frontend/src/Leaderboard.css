@@ -1,12 +1,48 @@
+Table Styling
+/* table {
+    width: 100%;
+    border-collapse: separate;
+    margin-top: 20px;
+    border: none; 
+} */
+
+table, th, td {
+    border: none;
+}
+
+th, td {
+    text-align: center;
+    padding: 5px;
+}
+
+th {
+    background-color: #38136bba; 
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f214;
+}
+
+table{
+    background:  #202528;
+    width: 100%;
+    border-radius: 2rem;
+    padding: 1.8rem ;
+    text-align: center;
+    box-shadow:0 2rem 3rem rgba(0, 0, 0, 0.4) ;
+    margin-bottom: 50px;
+}
+
+
+
 .lead-header {
     margin-bottom: 100px;
 }
 
-.linechart {
+.linechart, .barchart, .leaderboardTable {
     width: 700px;
-    padding-bottom: 70px;
+    padding-bottom: 80px;
 }
 
-.barchart {
-    width: 700px;
-}
+
