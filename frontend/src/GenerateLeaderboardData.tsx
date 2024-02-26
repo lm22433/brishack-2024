@@ -68,6 +68,7 @@ async function GenerateLeaderboardData(): Promise<Struct[][]> {
     const datasets: Struct[][] = [];
     datasets.push(generate(vapes.filter((vape) => vape.userId === 1)));
     datasets.push(generate(vapes.filter((vape) => vape.userId === 2)));
+    datasets.push(generate(vapes.filter((vape) => vape.userId === 3)));
     result = datasets;
   });
   return result;
