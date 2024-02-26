@@ -194,9 +194,11 @@ function Leaderboard() {
             </table>
           </div>
           <div className="linechart">
+            <h1>Daily Tokes Comparison</h1>
             <Line data={testData} options={chartOptions} />
           </div>
           <div className="barchart">
+            <h1>Longest Streak Comparison</h1>
             <Bar data={streakData} options={chartOptions} />
           </div>
         </div>

@@ -40,12 +40,9 @@ table{
     margin-bottom: 100px;
 }
 
-.linechart {
+.linechart, .barchart, .leaderboardTable {
     width: 700px;
-    padding-bottom: 70px;
+    padding-bottom: 80px;
 }
 
-.barchart {
-    width: 700px;
-}
 
