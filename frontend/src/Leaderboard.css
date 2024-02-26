@@ -16,9 +16,8 @@ th, td {
 }
 
 th {
-    background-color: #366cb2ba; 
+    background-color: #38136bba; 
     color: white;
-    border-radius: 2rem;
 }
 
 tr:nth-child(odd) {
