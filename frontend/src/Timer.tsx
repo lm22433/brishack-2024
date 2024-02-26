@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Confetti from "react-confetti"
+import CircularTimer from "./CircularTimer";
 
 type TimerProperties = {
   initialTime: number;

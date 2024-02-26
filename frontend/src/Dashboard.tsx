@@ -3,6 +3,8 @@ import Header from "./Header";
 import SidebarButton from "./SidebarButton";
 import { useState } from "react";
 import Timer from "./Timer";
+import VideoPlayer from "./VideoPlayer";
+import CircularTimer from "./CircularTimer";
 
 function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -22,6 +24,8 @@ function Dashboard() {
       <h1>Dashboard</h1>
       <h2>Username: {localStorage.getItem("username")}</h2>
       <h2>Name: {localStorage.getItem("name")}</h2>
+      {/* import video component here!!! */}
+      <CircularTimer duration={time} />
       <div>
         <Timer initialTime={time} />
       </div>

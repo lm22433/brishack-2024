@@ -41,6 +41,20 @@ const ChartComponent = () => {
   const [numberOfTokesWeekly, setNumberOfTokesWeekly] = useState(0);
   const [numberOfTokesTotal, setNumberOfTokesTotal] = useState(0);
 
+  const [refreshCounter, setRefreshCounter] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const manualRefresh = () => {
+    setRefreshCounter(refreshCounter + 1);
+  };
+
   const [allVapes, setAllVapes] = useState([]);
 
   useEffect(() => {
@@ -252,6 +266,9 @@ const ChartComponent = () => {
             <h2>{numberOfTokesTotal}</h2>
           </div>
         </div>
+        <button onClick={manualRefresh} style={{ marginTop: 10 }}>
+          Refresh
+        </button>
       </main>
       <div className="chart-container">
         <Bar data={chartData1} options={chartOptions} />
