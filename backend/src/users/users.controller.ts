@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   NotFoundException,
   Post,
   Res,
@@ -14,6 +15,11 @@ import { RegisterUserDto } from './dto/register-user.dto';
 @Controller('api/users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
+
+  @Get()
+  async getUsers() {
+    return await this.userService.getUsers();
+  }
 
   @Post('/login')
   async loginUser(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {

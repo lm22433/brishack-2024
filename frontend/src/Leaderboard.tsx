@@ -6,6 +6,7 @@ import Header from "./Header";
 import SidebarButton from "./SidebarButton";
 import "./Leaderboard.css";
 import GenerateLeaderboardData from "./GenerateLeaderboardData";
+import axios from "axios";
 
 type Struct = {
   day: number;
@@ -32,13 +33,12 @@ function GetStreak(indata: any[]) {
 }
 
 function Leaderboard() {
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            window.location.reload();
-        }, 60000);
-        return () => clearInterval(interval);
-      }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const [leaderboardData, setLeaderboardData] = useState<Struct[][]>([[], []]);
   const [testData, setTestData] = useState({
@@ -75,19 +75,16 @@ function Leaderboard() {
     ],
   });
 
-  const data = [
-    {rank: 1, username: "bla", name: "Harry", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 2, username: "bla", name: "Bagga", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 3, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 4, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 5, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 6, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 7, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 8, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 9, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
-    {rank: 10, username: "bla", name: "Lewis", tokes: 10, avgTime: 10, money: 10 },
+  const [data, setData] = useState<[]>([]);
 
-]
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios.get("http://localhost:3000/api/leaderboard").then((res) => {
+        setData(res.data);
+      });
+    };
+    fetchData();
+  }, [data]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -178,27 +175,26 @@ function Leaderboard() {
           <h1>Leaderboard</h1>
           <div className="leaderboardTable">
             <table>
-                <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Number of Tokes</th>
-                    <th>Mean Toke Times</th>
-                    <th>Total Money Spent</th>
-
-                </tr>
-                {data.map((val, key) => {
-                    return (
-                        <tr key={key}>
-                            <td>{val.rank}</td>
-                            <td>{val.username}</td>
-                            <td>{val.name}</td>
-                            <td>{val.tokes}</td>
-                            <td>{val.avgTime}</td>
-                            <td>{val.money}</td>
-                        </tr>
-                    )
-                })}
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Number of Tokes</th>
+                <th>Mean Toke Times</th>
+                <th>Total Money Spent</th>
+              </tr>
+              {data.map((val, key) => {
+                return (
+                  <tr key={key}>
+                    <td>{val.rank}</td>
+                    <td>{val.username}</td>
+                    <td>{val.name}</td>
+                    <td>{val.tokeCount}</td>
+                    <td>{(val.averageTokeTime / 1000).toFixed(2)}</td>
+                    <td>{(val.moneySpent).toFixed(2)}</td>
+                  </tr>
+                );
+              })}
             </table>
           </div>
           <div className="linechart">

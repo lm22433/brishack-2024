@@ -1,13 +1,14 @@
 .toggle-button {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 999; /* Ensure button appears above other content */
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  /* Styles for Sidebar component remain the same */
-  
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999; /* Ensure button appears above other content */
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.h1 {
+  margin-bottom: 20px;
+}

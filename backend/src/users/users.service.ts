@@ -13,6 +13,16 @@ import { GetUserDto } from './dto/get-user.dto';
 export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
+  async getUsers() {
+    const users = await this.prismaService.user.findMany();
+    return users.map((user) => ({
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      name: user.name,
+    }));
+  }
+
   async loginUser(username: string, password: string, @Res() res: Response) {
     const user = await this.prismaService.user.findUnique({
       where: {

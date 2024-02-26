@@ -5,10 +5,10 @@ import requests
 DEBUG = True
 API_ENDPOINT_URL='http://localhost:3000/api/vapes/'
 
-ser = serial.Serial('/dev/cu.usbmodem101', 9600)
+ser = serial.Serial('/dev/cu.usbmodem1101', 9600)
 
-light_off_threshold = 63500
-light_on_threshold = 62000
+light_off_threshold = 60500
+light_on_threshold = 58500
 
 light_on = False
 start_time = None
@@ -29,13 +29,15 @@ def process_data(data):
         if start_time is not None:
             duration = (time.time() - start_time) * 1000
 
-            # Make HTTP Backend Endpoint API Request to record the toke
-            try:
-                response = requests.post(API_ENDPOINT_URL, json={ 'userId': '1', 'duration': str(duration)})
-                response.raise_for_status()
-                print(f"Toke detected. Toke Time: {duration:.2f} milliseconds.")
-            except requests.exceptions.RequestException as exc:
-                print("Error recordign data:", exc)
+            if duration > 1000:
+                # Make HTTP Backend Endpoint API Request to record the toke
+                try:
+                    response = requests.post(API_ENDPOINT_URL, json={ 'userId': '3', 'duration': str(duration)})
+                    response.raise_for_status()
+                    print(f"Toke detected. Toke Time: {duration:.2f} milliseconds.")
+                except requests.exceptions.RequestException as exc:
+                    print("Error recording data:", exc)
+
             start_time = None
 
     if DEBUG == True:

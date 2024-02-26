@@ -110,7 +110,7 @@ const ChartComponent = () => {
           ];
           let dataArray = days.map((day) => res.data[day]);
           dataArray = dataArray.map((duration) =>
-            ((duration / 3000) * 20).toFixed(2)
+            ((duration / 3000) * 0.12).toFixed(2)
           );
           setClusteredDailyNicotineLevels(dataArray);
         });
