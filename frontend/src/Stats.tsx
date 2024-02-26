@@ -134,7 +134,6 @@ const ChartComponent = () => {
       {
         label: "# of Tokes",
         data: clusteredDailyVapes,
-       // backgroundColor: ["rgba(54, 162, 235, 0.2)"],
         backgroundColor: clusteredDailyVapes.map((value, index) => {
             const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
             return `rgba(54, 162, 235, ${opacity})`;
@@ -159,7 +158,6 @@ const ChartComponent = () => {
       {
         label: "Nicotine Intake (mg)",
         data: clusteredDailyNicotineLevels,
-        //backgroundColor: ["rgba(213,87,247,0.2)"],
         backgroundColor: clusteredDailyVapes.map((value, index) => {
             const opacity = index === currentDayIndex ? 0.7 : 0.2; // Set opacity to 1 for the current day, 0.2 for others
             return `rgba(213,87,247, ${opacity})`;
